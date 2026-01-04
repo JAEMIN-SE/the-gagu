@@ -1,10 +1,10 @@
-<header>
+@"
+<nav class="navbar navbar-expand-lg bg-white border-bottom">
   <div class="container">
-    <div class="nav">
-      <a class="brand" href="/">더,가구</a>
-      <a class="btn" href="https://open.kakao.com/o/svVlurfd" target="_blank" rel="noopener noreferrer">
-        카카오 상담
-      </a>
+    <a class="navbar-brand fw-bold" href="/">{{ .Site.Title }}</a>
+    <div class="ms-auto">
+      <a class="btn btn-outline-dark btn-sm" href="/products/">상품</a>
     </div>
   </div>
-</header>
+</nav>
+"@ | Out-File -Encoding utf8 layouts\partials\header.html

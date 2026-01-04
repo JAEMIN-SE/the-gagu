@@ -1,5 +1,7 @@
-<footer>
-  <div class="container">
-    <div>© {{ now.Format "2006" }} 더,가구 · 상담: 카카오 오픈채팅</div>
+@"
+<footer class="border-top py-4 mt-5">
+  <div class="container small text-muted text-center">
+    {{ .Site.Params.company }}
   </div>
 </footer>
+"@ | Out-File -Encoding utf8 layouts\partials\footer.html
