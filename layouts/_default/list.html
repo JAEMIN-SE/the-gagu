@@ -1,0 +1,36 @@
+{{ define "main" }}
+<div class="container">
+  <section class="hero">
+    <h1>사무용 가구, 깔끔하게.</h1>
+    <p>중고/리퍼/사무용 가구를 합리적으로 제안합니다. 상담은 카카오 오픈채팅으로 빠르게 도와드려요.</p>
+    <a class="btn" href="https://open.kakao.com/o/svVlurfd" target="_blank" rel="noopener noreferrer">지금 상담하기</a>
+  </section>
+
+ <section class="grid">
+  {{ range where .Site.RegularPages "Section" "products" }}
+  <div class="card">
+    <img src="{{ .Params.thumb }}" alt="{{ .Title }}">
+    <div class="p">
+      <p class="t">{{ .Title }}</p>
+      <p class="d">{{ .Params.price }} · 상태 {{ .Params.condition }}</p>
+    </div>
+  </div>
+  {{ end }}
+</section>
+    <div class="card">
+      <img src="/uploads/sample2.jpg" alt="상품2">
+      <div class="p">
+        <p class="t">의자 / 회의용</p>
+        <p class="d">재고 문의는 카카오로 주세요.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="/uploads/sample3.jpg" alt="상품3">
+      <div class="p">
+        <p class="t">수납 / 캐비닛</p>
+        <p class="d">배송/설치 상담 가능.</p>
+      </div>
+    </div>
+  </section>
+</div>
+{{ end }}
