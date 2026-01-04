@@ -1,13 +1,14 @@
 baseURL: "https://dulcet-mandazi-1d3554.netlify.app/"
 languageCode: "ko-kr"
-title: "??媛援?
+title: "더,가구"
+
+taxonomies:
+  category: categories
 
 params:
-  heroImage: "/uploads/hero.jpg"
   kakaoChannel: "https://open.kakao.com/o/svVlurfd"
   tel: "010-2299-8652"
   sms: "010-2299-8652"
-  hours: "留ㅼ씪 10:00 ~ 19:00 (?곗쨷臾댄쑕/?대Т?쇱? 蹂꾨룄 怨듭?)"
-  address: "二쇱냼瑜??ш린???낅젰?섏꽭??
-taxonomies:
-  category: categories
+  heroImage: "/uploads/hero.jpg"
+  hours: "매일 10:00 ~ 19:00 (연중무휴/휴무일은 별도 공지)"
+  address: "주소를 여기에 입력하세요"
