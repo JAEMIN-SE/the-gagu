@@ -14,6 +14,9 @@ collections:
     extension: "yaml"
     slug: "{{slug}}"
     fields:
+      - { label: "카테고리", name: "category", widget: "select", options: ["책상","의자","파티션","캐비닛","회의테이블","서랍","책장","기타"], default: "기타" }
+      - { label: "판매완료", name: "soldOut", widget: "boolean", default: false, required: false }
+
       - { label: "상품명", name: "title", widget: "string" }
       - { label: "가격", name: "price", widget: "number" }
       - { label: "브랜드", name: "brand", widget: "string", required: false }

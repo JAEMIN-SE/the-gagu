@@ -1,0 +1,49 @@
+﻿{{ define "main" }}
+<div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+  <div>
+    <h2 class="fw-bold mb-1">상품</h2>
+    <div class="text-muted small">원하시는 상품을 클릭하면 상세 정보와 상담으로 연결됩니다.</div>
+  </div>
+
+  <div class="d-flex flex-wrap gap-2">
+    <a class="btn btn-sm btn-outline-dark" href="/products/">전체</a>
+    {{ range (slice "책상" "의자" "파티션" "캐비닛" "회의테이블" "서랍" "책장" "기타") }}
+      <a class="btn btn-sm btn-outline-dark" href="/products/?cat={{ . }}">{{ . }}</a>
+    {{ end }}
+  </div>
+</div>
+
+{{ $cat := .Request.URL.Query.Get "cat" }}
+
+<div class="row g-3">
+  {{ range where .Pages "Section" "products" }}
+    {{ $pCat := .Params.category | default "기타" }}
+    {{ $sold := .Params.soldOut | default false }}
+
+    {{ if or (eq $cat "") (eq $cat $pCat) }}
+      <div class="col-12 col-md-6 col-lg-3">
+        <a class="text-decoration-none text-dark" href="{{ .RelPermalink }}">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="ratio ratio-4x3 bg-light rounded-top overflow-hidden position-relative">
+              {{ $img := index (.Params.images | default (slice)) 0 }}
+              {{ if $img }}
+                <img src="{{ $img }}" class="object-fit-cover w-100 h-100" alt="{{ .Title }}">
+              {{ end }}
+
+              {{ if $sold }}
+                <span class="badge text-bg-dark position-absolute top-0 end-0 m-2">판매완료</span>
+              {{ end }}
+            </div>
+
+            <div class="card-body">
+              <div class="fw-semibold">{{ .Title }}</div>
+              <div class="text-muted small">{{ $pCat }} · 상태 {{ .Params.condition }}</div>
+              <div class="fw-bold mt-2">{{ .Params.price }}원</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    {{ end }}
+  {{ end }}
+</div>
+{{ end }}

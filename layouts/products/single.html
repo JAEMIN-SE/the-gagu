@@ -1,0 +1,51 @@
+﻿{{ define "main" }}
+{{ $sold := .Params.soldOut | default false }}
+<div class="row g-4">
+  <div class="col-12 col-lg-7">
+    <div class="border rounded-4 overflow-hidden bg-light">
+      {{ $img := index (.Params.images | default (slice)) 0 }}
+      {{ if $img }}
+        <img src="{{ $img }}" class="img-fluid w-100" alt="{{ .Title }}">
+      {{ end }}
+    </div>
+
+    {{ with .Params.images }}
+      {{ if gt (len .) 1 }}
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          {{ range . }}
+            <img src="{{ . }}" style="width:120px;height:90px;object-fit:cover;" class="rounded-3 border" alt="">
+          {{ end }}
+        </div>
+      {{ end }}
+    {{ end }}
+  </div>
+
+  <div class="col-12 col-lg-5">
+    <div class="d-flex align-items-center gap-2">
+      <h1 class="fw-bold mb-0">{{ .Title }}</h1>
+      {{ if $sold }}<span class="badge text-bg-dark">판매완료</span>{{ end }}
+    </div>
+
+    <div class="text-muted mt-2">
+      카테고리 {{ .Params.category | default "기타" }} · 상태 {{ .Params.condition }}
+    </div>
+
+    <div class="display-6 fw-bold mt-3">{{ .Params.price }}원</div>
+
+    <div class="d-grid gap-2 mt-3">
+      <a class="btn btn-warning btn-lg" href="{{ .Site.Params.kakaoChannel }}" target="_blank">
+        카카오톡으로 문의하기
+      </a>
+      {{ with .Site.Params.tel }}
+        <a class="btn btn-outline-dark btn-lg" href="tel:{{ . }}">전화 문의</a>
+      {{ end }}
+    </div>
+
+    <hr class="my-4">
+
+    <div class="prose">
+      {{ .Content }}
+    </div>
+  </div>
+</div>
+{{ end }}
