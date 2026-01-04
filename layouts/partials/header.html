@@ -1,10 +1,10 @@
-@"
-<nav class="navbar navbar-expand-lg bg-white border-bottom">
+﻿<nav class="navbar navbar-expand-lg bg-white border-bottom">
   <div class="container">
     <a class="navbar-brand fw-bold" href="/">{{ .Site.Title }}</a>
-    <div class="ms-auto">
+
+    <div class="ms-auto d-flex gap-2">
       <a class="btn btn-outline-dark btn-sm" href="/products/">상품</a>
+      <a class="btn btn-dark btn-sm" href="/contact/">상담/오시는길</a>
     </div>
   </div>
 </nav>
-"@ | Out-File -Encoding utf8 layouts\partials\header.html
