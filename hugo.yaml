@@ -1,10 +1,13 @@
-baseURL: https://example.org/
-languageCode: en-us
-title: My New Hugo Site
-  tel: "010-2299-8652"
-  heroImage: "/uploads/hero.jpg"
+﻿baseURL: "https://dulcet-mandazi-1d3554.netlify.app/"
+languageCode: "ko-kr"
+title: "더,가구"
+
 params:
-  hours: "매일 10:00 ~ 19:00 (연중무휴/휴무일은 별도 공지)"
-  address: "경기도 ○○시 ○○구 ○○로 00 (상세주소)"
-  sms: "010-2299-8652"
+  kakaoChannel: "https://open.kakao.com/o/svVlurfd"
   tel: "010-2299-8652"
+  sms: "010-2299-8652"
+  heroImage: "/uploads/hero-1.jpg"
+  hours: "매일 10:00 ~ 19:00 (연중무휴/휴무일은 별도 공지)"
+  address: "주소를 여기에 입력하세요"
+taxonomies:
+  category: categories
