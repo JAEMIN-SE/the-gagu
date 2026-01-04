@@ -1,3 +1,5 @@
 baseURL: https://example.org/
 languageCode: en-us
 title: My New Hugo Site
+  tel: "010-2299-8652"
+  heroImage: "/uploads/hero.jpg"

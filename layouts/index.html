@@ -1,0 +1,73 @@
+﻿{{ define "main" }}
+<div class="row g-4">
+  <!-- HERO -->
+  <div class="col-12">
+    <div class="p-5 bg-light rounded-4 border">
+      <div class="row align-items-center g-4">
+        <div class="col-12 col-lg-7">
+          <h1 class="fw-bold display-5 mb-2">사무용 가구, 깔끔하게.</h1>
+          <p class="text-muted fs-5 mb-4">
+            중고/리퍼/사무용 가구를 합리적으로 제안합니다.<br>
+            상담은 카카오 오픈채팅으로 빠르게 도와드려요.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-warning btn-lg" href="{{ .Site.Params.kakaoChannel }}" target="_blank">지금 상담하기</a>
+            {{ with .Site.Params.tel }}
+              <a class="btn btn-outline-dark btn-lg" href="tel:{{ . }}">전화하기</a>
+            {{ end }}
+          </div>
+          {{ if not .Site.Params.tel }}
+            <div class="small text-muted mt-2">전화 버튼을 쓰려면 hugo.yaml에 params.tel을 추가하세요.</div>
+          {{ end }}
+        </div>
+
+        <div class="col-12 col-lg-5">
+          <div class="rounded-4 overflow-hidden bg-white border">
+            <img src="{{ .Site.Params.heroImage | default "/uploads/hero.jpg" }}" class="img-fluid" alt="더,가구">
+          </div>
+          <div class="small text-muted mt-2">* 메인 이미지는 /static/uploads/hero.jpg 로 올리면 자동 반영됩니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY CHIPS -->
+  <div class="col-12">
+    <div class="d-flex flex-wrap gap-2">
+      {{ range (slice "책상" "의자" "파티션" "캐비닛" "회의테이블" "서랍" "책장") }}
+        <span class="badge bg-secondary-subtle text-dark border px-3 py-2">{{ . }}</span>
+      {{ end }}
+    </div>
+  </div>
+
+  <!-- LATEST PRODUCTS -->
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3 class="fw-bold mb-0">최신 상품</h3>
+      <a class="text-decoration-none" href="/products/">전체 보기 →</a>
+    </div>
+
+    <div class="row g-3">
+      {{ range first 8 (where .Site.RegularPages "Section" "products") }}
+      <div class="col-12 col-md-6 col-lg-3">
+        <a class="text-decoration-none text-dark" href="{{ .RelPermalink }}">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="ratio ratio-4x3 bg-light rounded-top overflow-hidden">
+              {{ $img := index (.Params.images | default (slice)) 0 }}
+              {{ if $img }}
+                <img src="{{ $img }}" class="object-fit-cover w-100 h-100" alt="{{ .Title }}">
+              {{ end }}
+            </div>
+            <div class="card-body">
+              <div class="fw-semibold">{{ .Title }}</div>
+              <div class="text-muted small">{{ .Params.brand }} · 상태 {{ .Params.condition }}</div>
+              <div class="fw-bold mt-2">{{ .Params.price }}원</div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
