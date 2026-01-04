@@ -1,0 +1,22 @@
+﻿backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "static/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "products"
+    label: "상품"
+    folder: "content/products"
+    create: true
+    format: "yaml"
+    extension: "yaml"
+    slug: "{{slug}}"
+    fields:
+      - { label: "상품명", name: "title", widget: "string" }
+      - { label: "가격", name: "price", widget: "number" }
+      - { label: "브랜드", name: "brand", widget: "string", required: false }
+      - { label: "상태", name: "condition", widget: "select", options: ["상","중","하"] }
+      - { label: "이미지", name: "images", widget: "list", field: { label: "이미지", name: "image", widget: "image" } }
+      - { label: "상세 설명", name: "body", widget: "markdown" }
