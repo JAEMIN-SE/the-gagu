@@ -1,1 +1,8 @@
 public/
+# Hugo build output (Netlify가 hugo로 빌드하므로 보통 public은 커밋하지 않음)
+public/
+
+# backup/temp
+*.bak
+*.bad
+patch-admin-config.ps1

@@ -1,23 +1,35 @@
-﻿{{ define "main" }}
+﻿{{/* HOME SETTINGS LOADER (safe) */}}
+{{ $home := site.GetPage "settings/home" }}
+{{ if not $home }}{{ $home = site.GetPage "settings/home.md" }}{{ end }}
+{{ if not $home }}{{ $home = site.GetPage "/settings/home" }}{{ end }}
+{{ if not $home }}{{ $home = site.GetPage "/settings/home.md" }}{{ end }}
+{{/* fallback values */}}
+{{ $heroTitle := cond (and $home $home.Params.heroTitle) $home.Params.heroTitle "?щТ??媛援? 源붾걫?섍쾶." }}
+{{ $heroDesc  := cond (and $home $home.Params.heroDesc)  $home.Params.heroDesc  "以묎퀬/由ы띁/?щТ??媛援щ? ?⑸━?곸쑝濡??쒖븞?⑸땲??" }}
+{{ $heroImg   := cond (and $home $home.Params.heroImage) $home.Params.heroImage "/uploads/hero.jpg" }}
+{{ $heroBtnT  := cond (and $home $home.Params.heroButtonText) $home.Params.heroButtonText "吏湲??곷떞?섍린" }}
+{{ $heroBtnL  := cond (and $home $home.Params.heroButtonLink) $home.Params.heroButtonLink site.Params.kakaoChannel }}
+
+{{ define "main" }}
 <div class="row g-4">
   <!-- HERO -->
   <div class="col-12">
     <div class="p-5 bg-light rounded-4 border">
       <div class="row align-items-center g-4">
         <div class="col-12 col-lg-7">
-          <h1 class="fw-bold display-5 mb-2">사무용 가구, 깔끔하게.</h1>
+          <h1 class="fw-bold display-5 mb-2">??龜??揶쎛?? 繹먮뗀嫄??띿쓺.</h1>
           <p class="text-muted fs-5 mb-4">
-            중고/리퍼/사무용 가구를 합리적으로 제안합니다.<br>
-            상담은 카카오 오픈채팅으로 빠르게 도와드려요.
+            餓λ쵌???귐뗫쓠/??龜??揶쎛?닌? ??멤봺?怨몄몵嚥???뽯툧??몃빍??<br>
+            ?怨룸뼖?? 燁삳똻萸????쎈탞筌?쑵???곗쨮 ??쥓?ㅵ칰??袁???뺤젻??
           </p>
           <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-warning btn-lg" href="{{ .Site.Params.kakaoChannel }}" target="_blank" rel="noopener">지금 상담하기</a>
+            <a class="btn btn-warning btn-lg" href="{{ .Site.Params.kakaoChannel }}" target="_blank" rel="noopener">筌왖疫??怨룸뼖??띾┛</a>
             {{ with .Site.Params.tel }}
-              <a class="btn btn-outline-dark btn-lg" href="tel:{{ . }}">전화하기</a>
+              <a class="btn btn-outline-dark btn-lg" href="tel:{{ . }}">?袁れ넅??띾┛</a>
             {{ end }}
           </div>
           {{ if not .Site.Params.tel }}
-            <div class="small text-muted mt-2">전화 버튼을 쓰려면 hugo.yaml에 params.tel을 추가하세요.</div>
+            <div class="small text-muted mt-2">?袁れ넅 甕곌쑵????怨뺤젻筌?hugo.yaml??params.tel???곕떽???뤾쉭??</div>
           {{ end }}
         </div>
 
@@ -25,13 +37,16 @@
           <div id="heroCarousel" class="carousel slide rounded-4 overflow-hidden border bg-white" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="/uploads/hero1.jpg" class="d-block w-100" alt="더,가구 배너 1">
+      {{ $hero := .Site.Home.Params.heroImage | default (.Site.Params.heroImage | default "/uploads/hero.jpg") }}
+<img src="{{ $hero }}" class="img-fluid" alt="??揶쎛??>
     </div>
     <div class="carousel-item">
-      <img src="/uploads/hero2.jpg" class="d-block w-100" alt="더,가구 배너 2">
+      {{ $hero := .Site.Home.Params.heroImage | default (.Site.Params.heroImage | default "/uploads/hero.jpg") }}
+<img src="{{ $hero }}" class="img-fluid" alt="??揶쎛??>
     </div>
     <div class="carousel-item">
-      <img src="/uploads/hero3.jpg" class="d-block w-100" alt="더,가구 배너 3">
+      {{ $hero := .Site.Home.Params.heroImage | default (.Site.Params.heroImage | default "/uploads/hero.jpg") }}
+<img src="{{ $hero }}" class="img-fluid" alt="??揶쎛??>
     </div>
   </div>
 
@@ -55,17 +70,17 @@
   <!-- CATEGORY CHIPS -->
   <div class="col-12">
     <div class="d-flex flex-wrap gap-2">
-      {{ range (slice "책상" "의자" "파티션" "캐비닛" "회의테이블" "서랍" "책장") }}
+      {{ range (slice "筌?굞湲? "??륁쁽" "??곕뼒?? "筌?Ŧ??? "???벥???뵠?? "??뺤뿻" "筌?굞??) }}
         <span class="badge bg-secondary-subtle text-dark border px-3 py-2">{{ . }}</span>
       {{ end }}
     </div>
   </div>
 
-  <!-- LATEST PRODUCTS (판매중만) -->
+  <!-- LATEST PRODUCTS (?癒?꼻餓λ쵎彛? -->
   <div class="col-12">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h3 class="fw-bold mb-0">최신 상품</h3>
-      <a class="text-decoration-none" href="/products/">전체 보기 →</a>
+      <h3 class="fw-bold mb-0">筌ㅼ뮇???怨밸?</h3>
+      <a class="text-decoration-none" href="/products/">?袁⑷퍥 癰귣떯由???/a>
     </div>
 
     <div class="row g-3">
@@ -76,13 +91,14 @@
             <div class="ratio ratio-4x3 bg-light rounded-top overflow-hidden">
               {{ $img := index (.Params.images | default (slice)) 0 }}
               {{ if $img }}
-                <img src="{{ $img }}" class="object-fit-cover w-100 h-100" alt="{{ .Title }}">
+                {{ $hero := .Site.Home.Params.heroImage | default (.Site.Params.heroImage | default "/uploads/hero.jpg") }}
+<img src="{{ $hero }}" class="img-fluid" alt="??揶쎛??>
               {{ end }}
             </div>
             <div class="card-body">
               <div class="fw-semibold">{{ .Title }}</div>
-              <div class="text-muted small">{{ .Params.brand }} · 상태 {{ .Params.condition }}</div>
-              <div class="fw-bold mt-2">{{ .Params.price }}원</div>
+              <div class="text-muted small">{{ .Params.brand }} 夷??怨밴묶 {{ .Params.condition }}</div>
+              <div class="fw-bold mt-2">{{ .Params.price }}??/div>
             </div>
           </div>
         </a>
@@ -95,11 +111,11 @@
 <hr class="my-5">
 
 <!-- CATEGORY SECTIONS -->
-{{ range (slice "책상" "의자" "파티션") }}
+{{ range (slice "筌?굞湲? "??륁쁽" "??곕뼒??) }}
   <div class="mb-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="fw-bold mb-0">{{ . }} 추천</h4>
-      <a class="text-decoration-none" href="/products/?cat={{ . }}">더보기 →</a>
+      <h4 class="fw-bold mb-0">{{ . }} ?곕뗄荑?/h4>
+      <a class="text-decoration-none" href="/products/?cat={{ . }}">?遺얜궖疫???/a>
     </div>
 
     <div class="row g-3">
@@ -111,12 +127,13 @@
               <div class="ratio ratio-4x3 bg-light overflow-hidden">
                 {{ $img := index (.Params.images | default (slice)) 0 }}
                 {{ if $img }}
-                  <img src="{{ $img }}" class="object-fit-cover w-100 h-100" alt="{{ .Title }}">
+                  {{ $hero := .Site.Home.Params.heroImage | default (.Site.Params.heroImage | default "/uploads/hero.jpg") }}
+<img src="{{ $hero }}" class="img-fluid" alt="??揶쎛??>
                 {{ end }}
               </div>
               <div class="card-body">
                 <div class="fw-semibold">{{ .Title }}</div>
-                <div class="fw-bold mt-1">{{ .Params.price }}원</div>
+                <div class="fw-bold mt-1">{{ .Params.price }}??/div>
               </div>
             </div>
           </a>
@@ -127,4 +144,5 @@
   </div>
 {{ end }}
 {{ end }}
+
 

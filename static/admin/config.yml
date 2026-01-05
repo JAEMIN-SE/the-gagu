@@ -1,4 +1,4 @@
-﻿backend:
+backend:
   name: git-gateway
   branch: main
 
@@ -6,20 +6,30 @@ media_folder: "static/uploads"
 public_folder: "/uploads"
 
 collections:
+  - label: "???ㅼ젙"
+    name: "home"
+    files:
+      - label: "??諛곕꼫/臾멸뎄)"
+        name: "home_index"
+        file: "content/_index.md"
+        fields:
+          - { label: "?쒕ぉ", name: "title", widget: "string", default: "??媛援? }
+          - { label: "諛곕꼫 ?대?吏", name: "heroImage", widget: "image" }
+
   - name: "products"
-    label: "상품"
+    label: "?곹뭹"
     folder: "content/products"
     create: true
     format: "yaml"
     extension: "yaml"
     slug: "{{slug}}"
     fields:
-      - { label: "카테고리", name: "category", widget: "select", options: ["책상","의자","파티션","캐비닛","회의테이블","서랍","책장","기타"], default: "기타" }
-      - { label: "판매완료", name: "soldOut", widget: "boolean", default: false, required: false }
+      - { label: "移댄뀒怨좊━", name: "category", widget: "select", options: ["梨낆긽","?섏옄","?뚰떚??,"罹먮퉬??,"?뚯쓽?뚯씠釉?,"?쒕엻","梨낆옣","湲고?"], default: "湲고?" }
+      - { label: "?먮ℓ?꾨즺", name: "soldOut", widget: "boolean", default: false, required: false }
 
-      - { label: "상품명", name: "title", widget: "string" }
-      - { label: "가격", name: "price", widget: "number" }
-      - { label: "브랜드", name: "brand", widget: "string", required: false }
-      - { label: "상태", name: "condition", widget: "select", options: ["상","중","하"] }
-      - { label: "이미지", name: "images", widget: "list", field: { label: "이미지", name: "image", widget: "image" } }
-      - { label: "상세 설명", name: "body", widget: "markdown" }
+      - { label: "?곹뭹紐?, name: "title", widget: "string" }
+      - { label: "媛寃?, name: "price", widget: "number" }
+      - { label: "釉뚮옖??, name: "brand", widget: "string", required: false }
+      - { label: "?곹깭", name: "condition", widget: "select", options: ["??,"以?,"??] }
+      - { label: "?대?吏", name: "images", widget: "list", field: { label: "?대?吏", name: "image", widget: "image" } }
+      - { label: "?곸꽭 ?ㅻ챸", name: "body", widget: "markdown" }
