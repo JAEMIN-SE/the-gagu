@@ -6,60 +6,60 @@ media_folder: "static/uploads"
 public_folder: "/uploads"
 
 collections:
-  - label: "?????源놁젳"
+  - label: "?????繹먮냱??
     name: "home"
     files:
-      - label: "???袁⑸즲??먮き????뚮듋??"
+      - label: "???熬곣뫖利??癒?걤??????뱥??"
         name: "home_index"
         file: "content/_index.md"
         fields:
-          - { label: "??筌먯룄肄?, name: "title", widget: "string", default: "????좊읈??? }
-          - { label: "?袁⑸즲??먮き?????癲ル슣??", name: "heroImage", widget: "image" }
+          - { label: "??嶺뚮Ŋ猷꾥굜?, name: "title", widget: "string", default: "????醫딆쓧??? }
+          - { label: "?熬곣뫖利??癒?걤??????꿔꺂???", name: "heroImage", widget: "image" }
 
   - name: "products"
-    label: "???ㅺ강?"
+    label: "????브컯?"
     folder: "content/products"
     create: true
     format: "yaml"
     extension: "yaml"
     slug: "{{slug}}"
     fields:
-      - { label: "?怨멸텭??沃섅뀙??關履??, name: "category", widget: "select", options: ["癲??댁쉪臾?,"???쒓낯寃?,"???⑤베???,"癲?????,"???甕??????,"??筌먦끇??,"癲????,"??れ삀??"], default: "??れ삀??" }
-      - { label: "??????ш끽維??, name: "soldOut", widget: "boolean", default: false, required: false }
+      - { label: "??⑤㈇???亦껋꼨????쒙쭫??, name: "category", widget: "select", options: ["????곸돦??,"????볥궚野?,"????ㅻ쿋???,"??????,"??????????,"??嶺뚮Ĳ???,"?????,"???뚯???"], default: "???뚯???" }
+      - { label: "????????썹땟??, name: "soldOut", widget: "boolean", default: false, required: false }
 
-      - { label: "???ㅺ강?癲?, name: "title", widget: "string" }
-      - { label: "??좊읈???, name: "price", widget: "number" }
-      - { label: "??怨쀫뮛???, name: "brand", widget: "string", required: false }
-      - { label: "???ㅺ컼??, name: "condition", widget: "select", options: ["??,"濚?,"??] }
-      - { label: "????癲ル슣??", name: "images", widget: "list", field: { label: "????癲ル슣??", name: "image", widget: "image" } }
-      - { label: "???ㅳ늾??????용럡", name: "body", widget: "markdown" }
+      - { label: "????브컯???, name: "title", widget: "string" }
+      - { label: "??醫딆쓧???, name: "price", widget: "number" }
+      - { label: "???⑥ル츥???, name: "brand", widget: "string", required: false }
+      - { label: "????븐뻤??, name: "condition", widget: "select", options: ["??,"嚥?,"??] }
+      - { label: "?????꿔꺂???", name: "images", widget: "list", field: { label: "?????꿔꺂???", name: "image", widget: "image" } }
+      - { label: "????노듋???????⑸윞", name: "body", widget: "markdown" }
 
   - name: "settings"
-    label: "??쇱젟"
+    label: "???깆젧"
     files:
       - file: "content/settings/home.md"
-        label: "????쇱젟"
+        label: "?????깆젧"
         name: "home"
         fields:
-          - { label: "??뺛걠", name: "title", widget: "string" }
-          - { label: "??됰선嚥???뺛걠", name: "heroTitle", widget: "string" }
-          - { label: "??됰선嚥???살구", name: "heroDesc", widget: "string" }
-          - { label: "獄쏄퀡瑗????筌왖", name: "heroImage", widget: "image", required: false }
-          - { label: "甕곌쑵????용뮞??, name: "heroButtonText", widget: "string", required: false }
-          - { label: "甕곌쑵??筌띻낱寃?, name: "heroButtonLink", widget: "string", required: false }
+          - { label: "??類쏄콬", name: "title", widget: "string" }
+          - { label: "???곗꽑????類쏄콬", name: "heroTitle", widget: "string" }
+          - { label: "???곗꽑?????닿뎄", name: "heroDesc", widget: "string" }
+          - { label: "?꾩룄?←몭?????嶺뚯솘?", name: "heroImage", widget: "image", required: false }
+          - { label: "?뺢퀗??????⑸츩??, name: "heroButtonText", widget: "string", required: false }
+          - { label: "?뺢퀗???嶺뚮씧?긷칰?, name: "heroButtonLink", widget: "string", required: false }
 
       - file: "content/settings/business.md"
-        label: "??毓?癒?젟癰?
+        label: "??驪????잏솻?
         name: "business"
         fields:
-          - { label: "??뺛걠", name: "title", widget: "string" }
-          - { label: "?怨뱀깈", name: "company", widget: "string" }
-          - { label: "????뽰쁽", name: "ceo", widget: "string" }
-          - { label: "??毓?癒?쾻嚥≪빖苡??, name: "bizno", widget: "string" }
-          - { label: "??毓?????삺筌왖", name: "address", widget: "string" }
-          - { label: "??뉕묶", name: "biztype", widget: "string" }
-          - label: "?ル굝??
+          - { label: "??類쏄콬", name: "title", widget: "string" }
+          - { label: "??⑤?源?, name: "company", widget: "string" }
+          - { label: "????戮곗겱", name: "ceo", widget: "string" }
+          - { label: "??驪???苡삣슖?る퉾???, name: "bizno", widget: "string" }
+          - { label: "??驪??????븀춯?뼿", name: "address", widget: "string" }
+          - { label: "???뺣Ф", name: "biztype", widget: "string" }
+          - label: "??リ턁??
             name: "items"
             widget: "list"
             field: { label: "????, name: "item", widget: "string" }
-          - { label: "??李??, name: "email", widget: "string", required: false }
+          - { label: "???筌??, name: "email", widget: "string", required: false }
