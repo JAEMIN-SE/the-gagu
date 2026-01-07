@@ -6,30 +6,60 @@ media_folder: "static/uploads"
 public_folder: "/uploads"
 
 collections:
-  - label: "???ㅼ젙"
+  - label: "????쇱젟"
     name: "home"
     files:
-      - label: "??諛곕꼫/臾멸뎄)"
+      - label: "??獄쏄퀡瑗??얜㈇??"
         name: "home_index"
         file: "content/_index.md"
         fields:
-          - { label: "?쒕ぉ", name: "title", widget: "string", default: "??媛援? }
-          - { label: "諛곕꼫 ?대?吏", name: "heroImage", widget: "image" }
+          - { label: "??뺛걠", name: "title", widget: "string", default: "??揶쎛?? }
+          - { label: "獄쏄퀡瑗????筌왖", name: "heroImage", widget: "image" }
 
   - name: "products"
-    label: "?곹뭹"
+    label: "?怨밸?"
     folder: "content/products"
     create: true
     format: "yaml"
     extension: "yaml"
     slug: "{{slug}}"
     fields:
-      - { label: "移댄뀒怨좊━", name: "category", widget: "select", options: ["梨낆긽","?섏옄","?뚰떚??,"罹먮퉬??,"?뚯쓽?뚯씠釉?,"?쒕엻","梨낆옣","湲고?"], default: "湲고?" }
-      - { label: "?먮ℓ?꾨즺", name: "soldOut", widget: "boolean", default: false, required: false }
+      - { label: "燁삳똾?믤⑥쥓??, name: "category", widget: "select", options: ["筌?굞湲?,"??륁쁽","??곕뼒??,"筌?Ŧ???,"???벥???뵠??,"??뺤뿻","筌?굞??,"疫꿸퀬?"], default: "疫꿸퀬?" }
+      - { label: "?癒?꼻?袁⑥┷", name: "soldOut", widget: "boolean", default: false, required: false }
 
-      - { label: "?곹뭹紐?, name: "title", widget: "string" }
-      - { label: "媛寃?, name: "price", widget: "number" }
-      - { label: "釉뚮옖??, name: "brand", widget: "string", required: false }
-      - { label: "?곹깭", name: "condition", widget: "select", options: ["??,"以?,"??] }
-      - { label: "?대?吏", name: "images", widget: "list", field: { label: "?대?吏", name: "image", widget: "image" } }
-      - { label: "?곸꽭 ?ㅻ챸", name: "body", widget: "markdown" }
+      - { label: "?怨밸?筌?, name: "title", widget: "string" }
+      - { label: "揶쎛野?, name: "price", widget: "number" }
+      - { label: "?됰슢???, name: "brand", widget: "string", required: false }
+      - { label: "?怨밴묶", name: "condition", widget: "select", options: ["??,"餓?,"??] }
+      - { label: "???筌왖", name: "images", widget: "list", field: { label: "???筌왖", name: "image", widget: "image" } }
+      - { label: "?怨멸쉭 ??살구", name: "body", widget: "markdown" }
+
+  - name: "settings"
+    label: "설정"
+    files:
+      - file: "content/settings/home.md"
+        label: "홈 설정"
+        name: "home"
+        fields:
+          - { label: "제목", name: "title", widget: "string" }
+          - { label: "히어로 제목", name: "heroTitle", widget: "string" }
+          - { label: "히어로 설명", name: "heroDesc", widget: "string" }
+          - { label: "배너 이미지", name: "heroImage", widget: "image", required: false }
+          - { label: "버튼 텍스트", name: "heroButtonText", widget: "string", required: false }
+          - { label: "버튼 링크", name: "heroButtonLink", widget: "string", required: false }
+
+      - file: "content/settings/business.md"
+        label: "사업자정보"
+        name: "business"
+        fields:
+          - { label: "제목", name: "title", widget: "string" }
+          - { label: "상호", name: "company", widget: "string" }
+          - { label: "대표자", name: "ceo", widget: "string" }
+          - { label: "사업자등록번호", name: "bizno", widget: "string" }
+          - { label: "사업장 소재지", name: "address", widget: "string" }
+          - { label: "업태", name: "biztype", widget: "string" }
+          - label: "종목"
+            name: "items"
+            widget: "list"
+            field: { label: "항목", name: "item", widget: "string" }
+          - { label: "이메일", name: "email", widget: "string", required: false }
