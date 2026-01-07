@@ -9,3 +9,4 @@ patch-admin-config.ps1
 *.bak_*
 *.tmp
 patch-*.ps1
+*.bak.*
