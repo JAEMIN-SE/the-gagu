@@ -2,64 +2,65 @@ backend:
   name: git-gateway
   branch: main
 
+publish_mode: simple
+
 media_folder: "static/uploads"
 public_folder: "/uploads"
 
-collections:
-  - label: "?????濚밸Ŧ???
-    name: "home"
-    files:
-      - label: "????ш끽維뽳쭩????嫄??????諭??"
-        name: "home_index"
-        file: "content/_index.md"
-        fields:
-          - { label: "??癲ル슢흮?룰쑤援?, name: "title", widget: "string", default: "?????ル봿???? }
-          - { label: "??ш끽維뽳쭩????嫄??????轅붽틓???", name: "heroImage", widget: "image" }
+locale: "ko"
 
+collections:
   - name: "products"
-    label: "????釉뚯뺏?"
+    label: "상품"
     folder: "content/products"
     create: true
-    format: "yaml"
-    extension: "yaml"
     slug: "{{slug}}"
+    summary: "{{title}}"
     fields:
-      - { label: "???ㅳ늾???雅?퍔瑗?????숈???, name: "category", widget: "select", options: ["????怨몃룱??,"????蹂κ텥??,"?????살퓢???,"??????,"??????????,"??癲ル슢캉???,"?????,"???????"], default: "???????" }
-      - { label: "?????????밸븶??, name: "soldOut", widget: "boolean", default: false, required: false }
-
-      - { label: "????釉뚯뺏???, name: "title", widget: "string" }
-      - { label: "???ル봿????, name: "price", widget: "number" }
-      - { label: "????Β?レ른???, name: "brand", widget: "string", required: false }
-      - { label: "????釉먮빱??, name: "condition", widget: "select", options: ["??,"??,"??] }
-      - { label: "?????轅붽틓???", name: "images", widget: "list", field: { label: "?????轅붽틓???", name: "image", widget: "image" } }
-      - { label: "?????몃뱥????????몄쐾", name: "body", widget: "markdown" }
+      - { label: "제목", name: "title", widget: "string" }
+      - { label: "게시일", name: "date", widget: "datetime", required: false }
+      - { label: "가격(숫자)", name: "price", widget: "number", value_type: "int", min: 0, step: 1000 }
+      - label: "카테고리"
+        name: "category"
+        widget: "select"
+        options: ["책상", "의자", "파티션", "캐비닛", "회의테이블", "서랍", "책장"]
+      - { label: "브랜드", name: "brand", widget: "string", required: false }
+      - label: "상태"
+        name: "condition"
+        widget: "select"
+        options: ["상", "중", "하"]
+        required: false
+      - { label: "품절", name: "soldOut", widget: "boolean", default: false, required: false }
+      - label: "이미지들"
+        name: "images"
+        widget: "list"
+        required: false
+        field: { label: "이미지", name: "image", widget: "image" }
+      - { label: "본문", name: "body", widget: "markdown", required: false }
 
   - name: "settings"
-    label: "???源놁젳"
+    label: "설정"
     files:
-      - file: "content/settings/home.md"
-        label: "?????源놁젳"
+      - label: "홈 설정"
         name: "home"
+        file: "content/settings/home.md"
         fields:
-          - { label: "??筌먯룄肄?, name: "title", widget: "string" }
-          - { label: "???怨쀪퐨????筌먯룄肄?, name: "heroTitle", widget: "string" }
-          - { label: "???怨쀪퐨??????용럡", name: "heroDesc", widget: "string" }
-          - { label: "?袁⑸즲??먮き?????癲ル슣??", name: "heroImage", widget: "image", required: false }
-          - { label: "?類????????몄릇??, name: "heroButtonText", widget: "string", required: false }
-          - { label: "?類????癲ル슢??湲룹물?, name: "heroButtonLink", widget: "string", required: false }
+          - { label: "제목", name: "title", widget: "string", required: false }
+          - { label: "히어로 타이틀", name: "heroTitle", widget: "string", required: false }
+          - { label: "히어로 설명", name: "heroDesc", widget: "text", required: false }
+          - { label: "배너 이미지", name: "heroImage", widget: "image", required: false }
+          - { label: "버튼 텍스트", name: "heroButtonText", widget: "string", required: false }
+          - { label: "버튼 링크", name: "heroButtonLink", widget: "string", required: false }
 
-      - file: "content/settings/business.md"
-        label: "??癲?????륁녃?
+      - label: "사업자 정보"
         name: "business"
+        file: "content/settings/business.md"
         fields:
-          - { label: "??筌먯룄肄?, name: "title", widget: "string" }
-          - { label: "????繹?, name: "company", widget: "string" }
-          - { label: "????筌믨퀣寃?, name: "ceo", widget: "string" }
-          - { label: "??癲????≪궍???뗮돻???, name: "bizno", widget: "string" }
-          - { label: "??癲??????釉異?堉온", name: "address", widget: "string" }
-          - { label: "???類Ｐ?, name: "biztype", widget: "string" }
-          - label: "???ろ꼤??
-            name: "items"
-            widget: "list"
-            field: { label: "????, name: "item", widget: "string" }
-          - { label: "???嶺??, name: "email", widget: "string", required: false }
+          - { label: "제목", name: "title", widget: "string", required: false }
+          - { label: "상호", name: "storeName", widget: "string", required: false }
+          - { label: "대표자", name: "owner", widget: "string", required: false }
+          - { label: "사업자등록번호", name: "bizNo", widget: "string", required: false }
+          - { label: "주소", name: "address", widget: "string", required: false }
+          - { label: "업태", name: "bizType", widget: "string", required: false }
+          - { label: "종목", name: "bizItem", widget: "string", required: false }
+          - { label: "이메일", name: "email", widget: "string", required: false }
