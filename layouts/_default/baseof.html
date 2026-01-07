@@ -16,6 +16,31 @@
   </style>
 
   {{ block "head" . }}{{ end }}
+<style>
+/* MOBILE_TUNE_V1 */
+  @media (max-width: 576px) {
+    .hero-wrap { padding: 20px !important; }
+    .hero-title { font-size: 1.9rem !important; line-height: 1.2 !important; }
+    .hero-desc { font-size: 1rem !important; }
+    .hero-actions .btn { width: 100%; }
+    .hero-actions { gap: 10px !important; }
+    .hero-media { margin-top: 12px; }
+
+    .chip-row { overflow-x: auto; white-space: nowrap; padding-bottom: 6px; }
+    .chip-row .badge { flex: 0 0 auto; }
+  }
+
+  .product-card .ratio { border-radius: 12px; }
+  .product-card { border-radius: 14px; }
+  .product-card .card-body { padding: 12px 12px 14px; }
+  .product-price { font-size: 1.05rem; }
+
+  .img-placeholder {
+    display:flex; align-items:center; justify-content:center;
+    width:100%; height:100%;
+    color:#999; font-size:.9rem;
+  }
+</style>
 </head>
 
 <body>
