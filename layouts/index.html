@@ -1,46 +1,35 @@
 {{ define "main" }}
 
-{{/* HOME SETTINGS LOADER */}}
+{{/* HOME SETTINGS (content/settings/home.md) */}}
 {{ $home := site.GetPage "settings/home" }}
-{{ if not $home }}{{ $home = site.GetPage "settings/home.md" }}{{ end }}
-{{ if not $home }}{{ $home = site.GetPage "/settings/home" }}{{ end }}
-{{ if not $home }}{{ $home = site.GetPage "/settings/home.md" }}{{ end }}
 
-{{/* fallback values */}}
-{{ $heroTitle := cond (and $home $home.Params.heroTitle) $home.Params.heroTitle "사무용 가구, 깔끔하게." }}
-{{ $heroDesc  := cond (and $home $home.Params.heroDesc)  $home.Params.heroDesc  "중고/리퍼/사무용 가구를 합리적으로 제안합니다. 상담은 카카오 오픈채팅으로 빠르게 도와드려요." }}
-{{ $heroBtnT  := cond (and $home $home.Params.heroButtonText) $home.Params.heroButtonText "지금 상담하기" }}
-{{ $heroBtnL  := cond (and $home $home.Params.heroButtonLink) $home.Params.heroButtonLink site.Params.kakaoChannel }}
+{{ $heroTitle := "사무용 가구, 깔끔하게." }}
+{{ $heroDesc  := "중고/리퍼/사무용 가구를 합리적으로 제안합니다." }}
+{{ $heroImg   := "/uploads/hero.jpg" }}
+{{ $heroBtnT  := "지금 상담하기" }}
+{{ $heroBtnL  := site.Params.kakaoChannel }}
 
-{{/* hero images: heroImages(배열) 우선, 없으면 heroImage(단일) 사용 */}}
-{{ $heroImgs := slice }}
-{{ if and $home $home.Params.heroImages }}
-  {{ $heroImgs = $home.Params.heroImages }}
-{{ else if and $home $home.Params.heroImage }}
-  {{ $heroImgs = slice $home.Params.heroImage }}
-{{ else if site.Params.heroImage }}
-  {{ $heroImgs = slice site.Params.heroImage }}
-{{ else }}
-  {{ $heroImgs = slice "/uploads/hero.jpg" }}
+{{ with $home }}
+  {{ with .Params.heroTitle }}{{ $heroTitle = . }}{{ end }}
+  {{ with .Params.heroDesc }}{{ $heroDesc  = . }}{{ end }}
+  {{ with .Params.heroImage }}{{ $heroImg  = . }}{{ end }}
+  {{ with .Params.heroButtonText }}{{ $heroBtnT = . }}{{ end }}
+  {{ with .Params.heroButtonLink }}{{ $heroBtnL = . }}{{ end }}
 {{ end }}
 
 <div class="row g-4">
-
   <!-- HERO -->
   <div class="col-12">
     <div class="p-5 bg-light rounded-4 border">
       <div class="row align-items-center g-4">
-
         <div class="col-12 col-lg-7">
           <h1 class="fw-bold display-5 mb-2">{{ $heroTitle }}</h1>
-          <p class="text-muted fs-5 mb-4">{{ $heroDesc }}</p>
+          <p class="text-muted fs-5 mb-4">
+            {{ $heroDesc }}
+          </p>
 
           <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-warning btn-lg"
-               href="{{ $heroBtnL }}"
-               target="_blank" rel="noopener">
-               {{ $heroBtnT }}
-            </a>
+            <a class="btn btn-warning btn-lg" href="{{ $heroBtnL }}" target="_blank" rel="noopener">{{ $heroBtnT }}</a>
 
             {{ with site.Params.tel }}
               <a class="btn btn-outline-dark btn-lg" href="tel:{{ . }}">전화하기</a>
@@ -49,28 +38,10 @@
         </div>
 
         <div class="col-12 col-lg-5">
-          <div id="heroCarousel" class="carousel slide rounded-4 overflow-hidden border bg-white" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              {{ range $i, $img := $heroImgs }}
-                <div class="carousel-item {{ if eq $i 0 }}active{{ end }}">
-                  <img src="{{ $img }}" class="img-fluid w-100" alt="{{ site.Title }} 배너">
-                </div>
-              {{ end }}
-            </div>
-
-            {{ if gt (len $heroImgs) 1 }}
-              <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            {{ end }}
+          <div class="rounded-4 overflow-hidden bg-white border">
+            <img src="{{ $heroImg }}" class="img-fluid w-100" alt="{{ site.Title }}">
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -93,67 +64,26 @@
 
     <div class="row g-3">
       {{ range first 8 (where (where site.RegularPages "Section" "products") ".Params.soldOut" "ne" true) }}
-        <div class="col-12 col-md-6 col-lg-3">
-          <a class="text-decoration-none text-dark" href="{{ .RelPermalink }}">
-            <div class="card h-100 border-0 shadow-sm">
-
-              <div class="ratio ratio-4x3 bg-light rounded-top overflow-hidden">
-                {{ $img := index (.Params.images | default (slice)) 0 }}
-                {{ if $img }}
-                  <img src="{{ $img }}" class="object-fit-cover w-100 h-100" alt="{{ .Title }}">
-                {{ end }}
-              </div>
-
-              <div class="card-body">
-                <div class="fw-semibold">{{ .Title }}</div>
-                <div class="text-muted small">{{ .Params.brand }} · 상태 {{ .Params.condition }}</div>
-                <div class="fw-bold mt-2">{{ .Params.price }}원</div>
-              </div>
-
+      <div class="col-12 col-md-6 col-lg-3">
+        <a class="text-decoration-none text-dark" href="{{ .RelPermalink }}">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="ratio ratio-4x3 bg-light rounded-top overflow-hidden">
+              {{ $img := index (.Params.images | default (slice)) 0 }}
+              {{ if $img }}
+                <img src="{{ $img }}" class="object-fit-cover w-100 h-100" alt="{{ .Title }}">
+              {{ end }}
             </div>
-          </a>
-        </div>
-      {{ end }}
-    </div>
-  </div>
-
-</div>
-
-<hr class="my-5">
-
-<!-- CATEGORY SECTIONS -->
-{{ range (slice "책상" "의자" "파티션") }}
-  <div class="mb-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="fw-bold mb-0">{{ . }} 추천</h4>
-
-      {{/* ✅ Hugo 안전 링크 (urlquery + printf) */}}
-      <a class="text-decoration-none" href="{{ (printf "/products/?cat=%s" (urlquery .)) | safeURL }}">더보기 →</a>
-    </div>
-
-    <div class="row g-3">
-      {{ range first 4 (where (where site.RegularPages "Section" "products") ".Params.category" .) }}
-        {{ if not (.Params.soldOut | default false) }}
-          <div class="col-12 col-md-6 col-lg-3">
-            <a class="text-decoration-none text-dark" href="{{ .RelPermalink }}">
-              <div class="card h-100 shadow-sm border-0">
-                <div class="ratio ratio-4x3 bg-light overflow-hidden">
-                  {{ $img := index (.Params.images | default (slice)) 0 }}
-                  {{ if $img }}
-                    <img src="{{ $img }}" class="object-fit-cover w-100 h-100" alt="{{ .Title }}">
-                  {{ end }}
-                </div>
-                <div class="card-body">
-                  <div class="fw-semibold">{{ .Title }}</div>
-                  <div class="fw-bold mt-1">{{ .Params.price }}원</div>
-                </div>
-              </div>
-            </a>
+            <div class="card-body">
+              <div class="fw-semibold">{{ .Title }}</div>
+              <div class="text-muted small">{{ .Params.brand }} · 상태 {{ .Params.condition }}</div>
+              <div class="fw-bold mt-2">{{ .Params.price }}원</div>
+            </div>
           </div>
-        {{ end }}
+        </a>
+      </div>
       {{ end }}
     </div>
   </div>
-{{ end }}
+</div>
 
 {{ end }}
