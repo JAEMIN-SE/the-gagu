@@ -1,4 +1,4 @@
-﻿backend:
+backend:
   name: git-gateway
   branch: main
 
@@ -6,11 +6,48 @@ media_folder: "static/uploads"
 public_folder: "/uploads"
 
 collections:
-  - name: "products"
-    label: "Products"
-    folder: "content/products"
+  - name: "sale"
+    label: "판매"
+    folder: "content/products/sale"
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - { label: "제목", name: "title", widget: "string" }
+      - { label: "가격", name: "price", widget: "string", required: false }
+      - { label: "설명", name: "description", widget: "text", required: false }
+      - label: "이미지"
+        name: "images"
+        widget: "list"
+        field: { label: "이미지", name: "image", widget: "image" }
+        required: false
+      - { label: "품절", name: "soldOut", widget: "boolean", required: false, default: false }
+
+  - name: "buy"
+    label: "매입"
+    folder: "content/products/buy"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "제목", name: "title", widget: "string" }
+      - { label: "희망가격(선택)", name: "price", widget: "string", required: false }
+      - { label: "설명", name: "description", widget: "text", required: false }
+      - label: "이미지"
+        name: "images"
+        widget: "list"
+        field: { label: "이미지", name: "image", widget: "image" }
+        required: false
+
+  - name: "rental"
+    label: "렌탈"
+    folder: "content/products/rental"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "제목", name: "title", widget: "string" }
+      - { label: "렌탈가격(선택)", name: "price", widget: "string", required: false }
+      - { label: "설명", name: "description", widget: "text", required: false }
+      - label: "이미지"
+        name: "images"
+        widget: "list"
+        field: { label: "이미지", name: "image", widget: "image" }
+        required: false
