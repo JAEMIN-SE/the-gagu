@@ -1,76 +1,16 @@
-backend:
+﻿backend:
   name: git-gateway
   branch: main
-
-publish_mode: simple
 
 media_folder: "static/uploads"
 public_folder: "/uploads"
 
-locale: "ko"
-
 collections:
   - name: "products"
-    label: "?곹뭹"
+    label: "Products"
     folder: "content/products"
-    
-    nested:
-      depth: 2
-create: true
+    create: true
     slug: "{{slug}}"
-    summary: "{{title}}"
     fields:
-      - label: "유형"
-        name: "type"
-        widget: "select"
-        options:
-          - { label: "판매", value: "sale" }
-          - { label: "매입", value: "buy" }
-          - { label: "렌탈", value: "rental" }
-        required: true      - { label: "?쒕ぉ", name: "title", widget: "string" }
-      - { label: "寃뚯떆??, name: "date", widget: "datetime", required: false }
-      - { label: "媛寃??レ옄)", name: "price", widget: "number", value_type: "int", min: 0, step: 1000 }
-      - label: "移댄뀒怨좊━"
-        name: "category"
-        widget: "select"
-        options: ["梨낆긽", "?섏옄", "?뚰떚??, "罹먮퉬??, "?뚯쓽?뚯씠釉?, "?쒕엻", "梨낆옣"]
-      - { label: "釉뚮옖??, name: "brand", widget: "string", required: false }
-      - label: "?곹깭"
-        name: "condition"
-        widget: "select"
-        options: ["??, "以?, "??]
-        required: false
-      - { label: "?덉젅", name: "soldOut", widget: "boolean", default: false, required: false }
-      - label: "?대?吏??
-        name: "images"
-        widget: "list"
-        required: false
-        field: { label: "?대?吏", name: "image", widget: "image" }
-      - { label: "蹂몃Ц", name: "body", widget: "markdown", required: false }
-
-  - name: "settings"
-    label: "?ㅼ젙"
-    files:
-      - label: "???ㅼ젙"
-        name: "home"
-        file: "content/settings/home.md"
-        fields:
-          - { label: "?쒕ぉ", name: "title", widget: "string", required: false }
-          - { label: "?덉뼱濡???댄?", name: "heroTitle", widget: "string", required: false }
-          - { label: "?덉뼱濡??ㅻ챸", name: "heroDesc", widget: "text", required: false }
-          - { label: "諛곕꼫 ?대?吏", name: "heroImage", widget: "image", required: false }
-          - { label: "踰꾪듉 ?띿뒪??, name: "heroButtonText", widget: "string", required: false }
-          - { label: "踰꾪듉 留곹겕", name: "heroButtonLink", widget: "string", required: false }
-
-      - label: "?ъ뾽???뺣낫"
-        name: "business"
-        file: "content/settings/business.md"
-        fields:
-          - { label: "?쒕ぉ", name: "title", widget: "string", required: false }
-          - { label: "?곹샇", name: "storeName", widget: "string", required: false }
-          - { label: "??쒖옄", name: "owner", widget: "string", required: false }
-          - { label: "?ъ뾽?먮벑濡앸쾲??, name: "bizNo", widget: "string", required: false }
-          - { label: "二쇱냼", name: "address", widget: "string", required: false }
-          - { label: "?낇깭", name: "bizType", widget: "string", required: false }
-          - { label: "醫낅ぉ", name: "bizItem", widget: "string", required: false }
-          - { label: "?대찓??, name: "email", widget: "string", required: false }
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown"}

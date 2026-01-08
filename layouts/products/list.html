@@ -1,37 +1,8 @@
-{{ define "main" }}
-<div class="container" style="max-width:1100px;margin:0 auto;padding:24px 16px;">
-  <div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;">
-    <h1 style="margin:0;font-size:28px;font-weight:800;">{{ .Title }}</h1>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <a class="btn" href="/products/">전체</a>
-      <a class="btn" href="/products/sale/">판매</a>
-      <a class="btn" href="/products/buy/">매입</a>
-      <a class="btn" href="/products/rental/">렌탈</a>
-    </div>
-  </div>
-
-  <div style="margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
-    {{ range .Pages }}
-      <a href="{{ .RelPermalink }}" style="border:1px solid #eee;border-radius:16px;overflow:hidden;display:block;">
-        {{ $img := index (.Params.images | default (slice)) 0 }}
-        {{ if $img }}
-          <img src="{{ $img }}" alt="{{ .Title }}" style="width:100%;height:220px;object-fit:cover;display:block;background:#f6f6f6;">
-        {{ else }}
-          <div style="width:100%;height:220px;background:#f6f6f6;"></div>
-        {{ end }}
-        <div style="padding:14px;">
-          <div style="font-weight:800;margin:0 0 6px;">{{ .Title }}</div>
-          {{ with .Params.price }}<div style="color:#444;font-weight:700;">{{ . }}원</div>{{ end }}
-          {{ with .Params.description }}<div style="color:#666;font-size:14px;line-height:1.5;margin-top:6px;">{{ . }}</div>{{ end }}
-        </div>
-      </a>
-    {{ end }}
-  </div>
-
-  <style>
-    @media (max-width: 900px){ .container > div:nth-of-type(2){ grid-template-columns:repeat(2,1fr) !important; } }
-    @media (max-width: 560px){ .container > div:nth-of-type(2){ grid-template-columns:1fr !important; } }
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid #111;border-radius:999px;text-decoration:none;color:#111;}
-  </style>
-</div>
+﻿{{ define "main" }}
+<h1>Products</h1>
+<ul>
+  {{ range .Pages }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  {{ end }}
+</ul>
 {{ end }}
