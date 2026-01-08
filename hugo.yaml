@@ -1,6 +1,6 @@
 baseURL: "https://dulcet-mandazi-1d3554.netlify.app/"
 languageCode: "ko-kr"
-title: "더,가구"
+title: "다,가구"
 
 taxonomies:
   category: categories
@@ -11,4 +11,4 @@ params:
   sms: "010-2299-8652"
   heroImage: "/uploads/hero.jpg"
   hours: "매일 10:00 ~ 19:00 (연중무휴/휴무일은 별도 공지)"
-  address: "주소를 여기에 입력하세요"
+  address: "경기도 남양주시 진접읍 진벌로119번길 23"
