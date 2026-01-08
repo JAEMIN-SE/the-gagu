@@ -11,56 +11,66 @@ locale: "ko"
 
 collections:
   - name: "products"
-    label: "상품"
+    label: "?곹뭹"
     folder: "content/products"
-    create: true
+    
+    nested:
+      depth: 2
+create: true
     slug: "{{slug}}"
     summary: "{{title}}"
     fields:
-      - { label: "제목", name: "title", widget: "string" }
-      - { label: "게시일", name: "date", widget: "datetime", required: false }
-      - { label: "가격(숫자)", name: "price", widget: "number", value_type: "int", min: 0, step: 1000 }
-      - label: "카테고리"
+      - label: "유형"
+        name: "type"
+        widget: "select"
+        options:
+          - { label: "판매", value: "sale" }
+          - { label: "매입", value: "buy" }
+          - { label: "렌탈", value: "rental" }
+        required: true      - { label: "?쒕ぉ", name: "title", widget: "string" }
+      - { label: "寃뚯떆??, name: "date", widget: "datetime", required: false }
+      - { label: "媛寃??レ옄)", name: "price", widget: "number", value_type: "int", min: 0, step: 1000 }
+      - label: "移댄뀒怨좊━"
         name: "category"
         widget: "select"
-        options: ["책상", "의자", "파티션", "캐비닛", "회의테이블", "서랍", "책장"]
-      - { label: "브랜드", name: "brand", widget: "string", required: false }
-      - label: "상태"
+        options: ["梨낆긽", "?섏옄", "?뚰떚??, "罹먮퉬??, "?뚯쓽?뚯씠釉?, "?쒕엻", "梨낆옣"]
+      - { label: "釉뚮옖??, name: "brand", widget: "string", required: false }
+      - label: "?곹깭"
         name: "condition"
         widget: "select"
-        options: ["상", "중", "하"]
+        options: ["??, "以?, "??]
         required: false
-      - { label: "품절", name: "soldOut", widget: "boolean", default: false, required: false }
-      - label: "이미지들"
+      - { label: "?덉젅", name: "soldOut", widget: "boolean", default: false, required: false }
+      - label: "?대?吏??
         name: "images"
         widget: "list"
         required: false
-        field: { label: "이미지", name: "image", widget: "image" }
-      - { label: "본문", name: "body", widget: "markdown", required: false }
+        field: { label: "?대?吏", name: "image", widget: "image" }
+      - { label: "蹂몃Ц", name: "body", widget: "markdown", required: false }
 
   - name: "settings"
-    label: "설정"
+    label: "?ㅼ젙"
     files:
-      - label: "홈 설정"
+      - label: "???ㅼ젙"
         name: "home"
         file: "content/settings/home.md"
         fields:
-          - { label: "제목", name: "title", widget: "string", required: false }
-          - { label: "히어로 타이틀", name: "heroTitle", widget: "string", required: false }
-          - { label: "히어로 설명", name: "heroDesc", widget: "text", required: false }
-          - { label: "배너 이미지", name: "heroImage", widget: "image", required: false }
-          - { label: "버튼 텍스트", name: "heroButtonText", widget: "string", required: false }
-          - { label: "버튼 링크", name: "heroButtonLink", widget: "string", required: false }
+          - { label: "?쒕ぉ", name: "title", widget: "string", required: false }
+          - { label: "?덉뼱濡???댄?", name: "heroTitle", widget: "string", required: false }
+          - { label: "?덉뼱濡??ㅻ챸", name: "heroDesc", widget: "text", required: false }
+          - { label: "諛곕꼫 ?대?吏", name: "heroImage", widget: "image", required: false }
+          - { label: "踰꾪듉 ?띿뒪??, name: "heroButtonText", widget: "string", required: false }
+          - { label: "踰꾪듉 留곹겕", name: "heroButtonLink", widget: "string", required: false }
 
-      - label: "사업자 정보"
+      - label: "?ъ뾽???뺣낫"
         name: "business"
         file: "content/settings/business.md"
         fields:
-          - { label: "제목", name: "title", widget: "string", required: false }
-          - { label: "상호", name: "storeName", widget: "string", required: false }
-          - { label: "대표자", name: "owner", widget: "string", required: false }
-          - { label: "사업자등록번호", name: "bizNo", widget: "string", required: false }
-          - { label: "주소", name: "address", widget: "string", required: false }
-          - { label: "업태", name: "bizType", widget: "string", required: false }
-          - { label: "종목", name: "bizItem", widget: "string", required: false }
-          - { label: "이메일", name: "email", widget: "string", required: false }
+          - { label: "?쒕ぉ", name: "title", widget: "string", required: false }
+          - { label: "?곹샇", name: "storeName", widget: "string", required: false }
+          - { label: "??쒖옄", name: "owner", widget: "string", required: false }
+          - { label: "?ъ뾽?먮벑濡앸쾲??, name: "bizNo", widget: "string", required: false }
+          - { label: "二쇱냼", name: "address", widget: "string", required: false }
+          - { label: "?낇깭", name: "bizType", widget: "string", required: false }
+          - { label: "醫낅ぉ", name: "bizItem", widget: "string", required: false }
+          - { label: "?대찓??, name: "email", widget: "string", required: false }
