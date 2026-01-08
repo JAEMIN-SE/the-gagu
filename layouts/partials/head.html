@@ -1,25 +1,111 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>{{ if .Title }}{{ .Title }} | {{ end }}더,가구</title>
+<title>{{ with .Title }}{{ . }} | {{ end }}다,가구</title>
 
 <style>
-  body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif; background:#fff; color:#111; }
-  a { color: inherit; text-decoration:none; }
-  .container{ max-width:1100px; margin:0 auto; padding:0 16px; }
-  header{ position:sticky; top:0; background:#fff; border-bottom:1px solid #eee; }
-  .nav{ display:flex; align-items:center; justify-content:space-between; height:64px; }
-  .brand{ font-weight:800; letter-spacing:-0.5px; }
-  .btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border:1px solid #111; border-radius:999px; }
+  :root{
+    --text:#111;
+    --muted:#444;
+    --border:#eee;
+    --bg:#fff;
+    --card-bg:#f6f6f6;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+    background:var(--bg);
+    color:var(--text);
+  }
+  a{ color:inherit; text-decoration:none; }
+
+  .container{
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 16px;
+  }
+
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:var(--bg);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    font-weight:800;
+    letter-spacing:-0.5px;
+    white-space:nowrap;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 14px;
+    border:1px solid var(--text);
+    border-radius:999px;
+    white-space:nowrap;
+  }
+
   .hero{ padding:48px 0 24px; }
   .hero h1{ font-size:40px; margin:0 0 10px; }
-  .hero p{ margin:0 0 18px; color:#444; line-height:1.6; }
-  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; padding:22px 0 50px; }
-  .card{ border:1px solid #eee; border-radius:16px; overflow:hidden; }
-  .card img{ width:100%; height:220px; object-fit:cover; display:block; background:#f6f6f6; }
+  .hero p{
+    margin:0 0 18px;
+    color:var(--muted);
+    line-height:1.6;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+    padding:22px 0 50px;
+  }
+  .card{
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    background:var(--bg);
+  }
+  .card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    display:block;
+    background:var(--card-bg);
+  }
   .card .p{ padding:14px; }
   .card .t{ font-weight:700; margin:0 0 6px; }
-  .card .d{ margin:0; color:#555; font-size:14px; line-height:1.5; }
-  footer{ border-top:1px solid #eee; padding:18px 0; color:#666; font-size:14px; }
-  @media (max-width:900px){ .grid{ grid-template-columns:repeat(2,1fr);} .hero h1{font-size:34px;} }
-  @media (max-width:560px){ .grid{ grid-template-columns:1fr;} .hero h1{font-size:28px;} }
+  .card .d{
+    margin:0;
+    color:#555;
+    font-size:14px;
+    line-height:1.5;
+  }
+
+  footer{
+    border-top:1px solid var(--border);
+    padding:18px 0;
+    color:#666;
+    font-size:14px;
+  }
+
+  @media (max-width:900px){
+    .grid{ grid-template-columns:repeat(2, 1fr); }
+    .hero h1{ font-size:34px; }
+  }
+  @media (max-width:560px){
+    .grid{ grid-template-columns:1fr; }
+    .hero{ padding:32px 0 16px; }
+    .hero h1{ font-size:28px; }
+    .nav{ height:56px; }
+  }
 </style>
