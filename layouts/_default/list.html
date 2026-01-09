@@ -1,36 +1,26 @@
 ﻿{{ define "main" }}
-<div class="container">
-  <section class="hero">
-    <h1>?щТ??媛援? 源붾걫?섍쾶.</h1>
-    <p>以묎퀬/由ы띁/?щТ??媛援щ? ?⑸━?곸쑝濡??쒖븞?⑸땲?? ?곷떞? 移댁뭅???ㅽ뵂梨꾪똿?쇰줈 鍮좊Ⅴ寃??꾩??쒕젮??</p>
-    <a class="btn" href="https://open.kakao.com/o/svVlurfd" target="_blank" rel="noopener noreferrer">吏湲??곷떞?섍린</a>
-  </section>
+<div class="container my-4">
 
- <section class="grid">
-  {{ range where .Site.RegularPages "Section" "products" }}
-  <div class="card">
-    <img src="{{ .Params.thumb }}" alt="{{ .Title }}">
-    <div class="p">
-      <p class="t">{{ .Title }}</p>
-      <p class="d">{{ .Params.price }} 쨌 ?곹깭 {{ .Params.condition }}</p>
+  <h2 class="fw-bold mb-3">최신 상품</h2>
+
+  <div class="row g-3">
+    {{ range first 6 (where site.RegularPages "Section" "products") }}
+    <div class="col-12 col-md-6 col-lg-4">
+      <a class="text-decoration-none text-dark" href="{{ .RelPermalink }}">
+        <div class="card h-100">
+          {{ with .Params.thumb }}
+            <img src="{{ . }}" class="card-img-top" alt="{{ $.Title }}">
+          {{ end }}
+          <div class="card-body">
+            <h5 class="card-title">{{ .Title }}</h5>
+            {{ with .Params.price }}<p class="fw-bold mb-1">{{ . }}</p>{{ end }}
+            {{ with .Params.condition }}<p class="text-muted small">상태: {{ . }}</p>{{ end }}
+          </div>
+        </div>
+      </a>
     </div>
+    {{ end }}
   </div>
-  {{ end }}
-</section>
-    <div class="card">
-      <img src="/uploads/sample2.jpg" alt="?곹뭹2">
-      <div class="p">
-        <p class="t">?섏옄 / ?뚯쓽??/p>
-        <p class="d">?ш퀬 臾몄쓽??移댁뭅?ㅻ줈 二쇱꽭??</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="/uploads/sample3.jpg" alt="?곹뭹3">
-      <div class="p">
-        <p class="t">?섎궔 / 罹먮퉬??/p>
-        <p class="d">諛곗넚/?ㅼ튂 ?곷떞 媛??</p>
-      </div>
-    </div>
-  </section>
+
 </div>
 {{ end }}
