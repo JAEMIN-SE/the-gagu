@@ -1,18 +1,29 @@
-{{/* layouts/partials/footer.html */}}
+﻿{{/* layouts/partials/footer.html */}}
 <footer class="border-top">
   <div class="container py-4 small text-muted">
     {{ $biz := site.GetPage "settings/business" }}
 
     <div class="d-flex flex-wrap gap-3 align-items-center justify-content-between">
       <div>© {{ now.Format "2006" }} {{ .Site.Title }}</div>
+
       <div class="d-flex flex-wrap gap-3">
-        {{ with .Site.Params.tel }}<a class="text-decoration-none text-muted" href="tel:{{ . }}">전화</a>{{ end }}
-        {{ with .Site.Params.sms }}<a class="text-decoration-none text-muted" href="sms:{{ . }}">문자</a>{{ end }}
-        {{ with .Site.Params.kakaoChannel }}<a class="text-decoration-none text-muted" href="{{ . }}" target="_blank" rel="noopener">카카오 상담</a>{{ end }}
+        {{ with .Site.Params.tel }}
+          <a class="text-decoration-none text-muted" href="tel:{{ . }}">전화</a>
+        {{ end }}
+
+        {{ with .Site.Params.sms }}
+          <a class="text-decoration-none text-muted" href="sms:{{ . }}">문자</a>
+        {{ end }}
+
+        {{ with .Site.Params.kakaoChannel }}
+          <a class="text-decoration-none text-muted" href="{{ . }}" target="_blank" rel="noopener noreferrer">카카오 상담</a>
+        {{ end }}
       </div>
     </div>
 
-    {{ with .Site.Params.hours }}<div class="mt-2">{{ . }}</div>{{ end }}
+    {{ with .Site.Params.hours }}
+      <div class="mt-2">{{ . }}</div>
+    {{ end }}
 
     {{ if $biz }}
       <hr class="my-3">
@@ -22,14 +33,19 @@
         {{ with $biz.Params.bizno }}<div><b>사업자등록번호</b>: {{ . }}</div>{{ end }}
         {{ with $biz.Params.address }}<div><b>사업장 소재지</b>: {{ . }}</div>{{ end }}
         {{ with $biz.Params.biztype }}<div><b>업태</b>: {{ . }}</div>{{ end }}
+
         {{ with $biz.Params.items }}
-          <div><b>종목</b>:
+          <div>
+            <b>종목</b>:
             {{ range $i, $it := . }}
               {{ if gt $i 0 }}, {{ end }}{{ $it }}
             {{ end }}
           </div>
         {{ end }}
-        {{ with $biz.Params.email }}<div><b>이메일</b>: <a class="text-decoration-none" href="mailto:{{ . }}">{{ . }}</a></div>{{ end }}
+
+        {{ with $biz.Params.email }}
+          <div><b>이메일</b>: <a class="text-decoration-none" href="mailto:{{ . }}">{{ . }}</a></div>
+        {{ end }}
       </div>
     {{ end }}
   </div>

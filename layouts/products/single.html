@@ -1,14 +1,14 @@
-{{ define "main" }}
+﻿{{ define "main" }}
 <div class="container" style="max-width:1100px;margin:0 auto;padding:24px 16px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
     <div>
       <h1 style="margin:0;font-size:30px;font-weight:900;">{{ .Title }}</h1>
-      {{ with .Params.price }}<div style="margin-top:8px;font-size:18px;font-weight:800;">{{ . }}원</div>{{ end }}
+      {{ with .Params.price }}<div style="margin-top:8px;font-size:18px;font-weight:800;">{{ . }}??/div>{{ end }}
       {{ with .Params.description }}<p style="margin:12px 0 0;color:#444;line-height:1.7;">{{ . }}</p>{{ end }}
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      {{ with site.Params.kakaoChannel }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">상담</a>{{ end }}
-      {{ with site.Params.tel }}<a class="btn" href="tel:{{ . }}">전화</a>{{ end }}
+      {{ with site.Params.kakaoChannel }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">?곷떞</a>{{ end }}
+      {{ with site.Params.tel }}<a class="btn" href="tel:{{ . }}">?꾪솕</a>{{ end }}
     </div>
   </div>
 

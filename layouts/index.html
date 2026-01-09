@@ -1,3 +1,4 @@
+﻿@'
 {{ define "main" }}
 
 {{/* HOME SETTINGS (content/settings/home.md) */}}
@@ -18,18 +19,19 @@
 {{ end }}
 
 <div class="row g-4">
+
   <!-- HERO -->
   <div class="col-12">
     <div class="p-5 bg-light rounded-4 border hero-wrap">
       <div class="row align-items-center g-4">
         <div class="col-12 col-lg-7">
           <h1 class="fw-bold display-5 mb-2 hero-title">{{ $heroTitle }}</h1>
-          <p class="text-muted fs-5 mb-4 hero-desc">
-            {{ $heroDesc }}
-          </p>
+          <p class="text-muted fs-5 mb-4 hero-desc">{{ $heroDesc }}</p>
 
           <div class="d-flex flex-wrap gap-2 hero-actions">
-            <a class="btn btn-warning btn-lg" href="{{ $heroBtnL }}" target="_blank" rel="noopener">{{ $heroBtnT }}</a>
+            {{ with $heroBtnL }}
+              <a class="btn btn-warning btn-lg" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $heroBtnT }}</a>
+            {{ end }}
 
             {{ with site.Params.tel }}
               <a class="btn btn-outline-dark btn-lg" href="tel:{{ . }}">전화하기</a>
@@ -49,7 +51,7 @@
   <!-- CATEGORY CHIPS -->
   <div class="col-12">
     <div class="d-flex flex-wrap gap-2 hero-actions">
-      {{ range (slice "책상" "의자" "파티션" "캐비닛" "회의테이블" "서랍" "책장") }}
+      {{ range (slice "책상" "의자" "파티션" "캐비닛" "회의테이블" "수납" "책장") }}
         <span class="badge bg-secondary-subtle text-dark border px-3 py-2">{{ . }}</span>
       {{ end }}
     </div>
@@ -70,15 +72,15 @@
             <div class="ratio ratio-4x3 bg-light rounded-top overflow-hidden">
               {{ $img := index (.Params.images | default (slice)) 0 }}
               {{ if $img }}
-    <img src="{{ $img }}" class="object-fit-cover w-100 h-100" alt="{{ .Title }}">
-{{ else }}
-    <div class="img-placeholder">이미지 준비중</div>
-{{ end }}
+                <img src="{{ $img }}" class="object-fit-cover w-100 h-100" alt="{{ .Title }}">
+              {{ else }}
+                <div class="d-flex align-items-center justify-content-center w-100 h-100 text-muted small">이미지 준비중</div>
+              {{ end }}
             </div>
             <div class="card-body">
               <div class="fw-semibold">{{ .Title }}</div>
-              <div class="text-muted small">{{ .Params.brand }} · 상태 {{ .Params.condition }}</div>
-              <div class="fw-bold mt-2">{{ .Params.price }}원</div>
+              <div class="text-muted small">{{ with .Params.brand }}{{ . }} · {{ end }}상태 {{ .Params.condition }}</div>
+              <div class="fw-bold mt-2">{{ .Params.price }}</div>
             </div>
           </div>
         </a>
@@ -86,6 +88,8 @@
       {{ end }}
     </div>
   </div>
+
 </div>
 
 {{ end }}
+'@ | Out-File -Encoding utf8 .\layouts\index.html

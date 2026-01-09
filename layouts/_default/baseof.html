@@ -1,61 +1,24 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    .floating-kakao{
-      position: fixed; right: 18px; bottom: 18px; z-index: 9999;
-      border-radius: 999px; padding: 12px 16px;
+    .floating-kakao {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9999;
+      border-radius: 999px;
+      padding: 12px 16px;
       box-shadow: 0 10px 25px rgba(0,0,0,.15);
     }
   </style>
 
-  {{ block "head" . }}{{ end }}
-<style>
-/* MOBILE_TUNE_V1 */
-  @media (max-width: 576px) {
-    .hero-wrap { padding: 20px !important; }
-    .hero-title { font-size: 1.9rem !important; line-height: 1.2 !important; }
-    .hero-desc { font-size: 1rem !important; }
-    .hero-actions .btn { width: 100%; }
-    .hero-actions { gap: 10px !important; }
-    .hero-media { margin-top: 12px; }
-
-    .chip-row { overflow-x: auto; white-space: nowrap; padding-bottom: 6px; }
-    .chip-row .badge { flex: 0 0 auto; }
-  }
-
-  .product-card .ratio { border-radius: 12px; }
-  .product-card { border-radius: 14px; }
-  .product-card .card-body { padding: 12px 12px 14px; }
-  .product-price { font-size: 1.05rem; }
-
-  .img-placeholder {
-    display:flex; align-items:center; justify-content:center;
-    width:100%; height:100%;
-    color:#999; font-size:.9rem;
-  }
-</style>
-</head>
-
-<body>
-
-  {{ partial "header.html" . }}
-
-  <main class="container py-4">
-    {{ block "main" . }}{{ end }}
-  </main>
-
-  {{ partial "footer.html" . }}
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Netlify Identity (Decap CMS 로그인/토큰 처리) -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
@@ -68,7 +31,24 @@
       });
     }
   </script>
+</head>
 
-  {{ block "footer-scripts" . }}{{ end }}
+<body>
+
+  {{ partial "header.html" . }}
+
+  <main class="container my-4">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{ partial "footer.html" . }}
+
+  <a class="btn btn-warning floating-kakao"
+     href="{{ .Site.Params.kakaoChannel }}"
+     target="_blank"
+     rel="noopener noreferrer">
+     💬 카카오톡 상담
+  </a>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
