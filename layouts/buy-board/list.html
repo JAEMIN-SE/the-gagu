@@ -1,0 +1,66 @@
+{{ define "main" }}
+<div class="container" style="max-width:1100px;margin:0 auto;padding:28px 16px;">
+  <h1 style="margin:0 0 18px;text-align:center;font-size:34px;font-weight:900;">{{ .Title }}</h1>
+
+  <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;">
+    <input id="bbq" type="text" placeholder="검색어를 입력해주세요"
+      style="width:min(520px, 92vw);padding:14px 16px;border:1px solid #ddd;border-radius:10px;">
+    <button id="bbs" class="btn" type="button">검색</button>
+    <a class="btn btn-outline" href="/admin/#/collections/buy" target="_blank" rel="noopener">글쓰기</a>
+  </div>
+
+  <div style="text-align:center;color:#666;font-size:14px;margin:10px 0 18px;">
+    Total {{ len .Pages }}건
+  </div>
+
+  <div style="overflow:auto;border-top:1px solid #eee;">
+    <table style="width:100%;border-collapse:collapse;min-width:680px;">
+      <thead>
+        <tr style="border-bottom:1px solid #eee;color:#555;font-size:13px;">
+          <th style="padding:12px 10px;text-align:left;width:80px;">번호</th>
+          <th style="padding:12px 10px;text-align:left;">제목</th>
+          <th style="padding:12px 10px;text-align:center;width:140px;">작성자</th>
+          <th style="padding:12px 10px;text-align:center;width:120px;">날짜</th>
+        </tr>
+      </thead>
+      <tbody id="bb-list">
+        {{ $i := 0 }}
+        {{ range .Pages.ByDate.Reverse }}
+          {{ $i = add $i 1 }}
+          <tr style="border-bottom:1px solid #f0f0f0;">
+            <td style="padding:14px 10px;">{{ $i }}</td>
+            <td style="padding:14px 10px;">
+              <a href="{{ .RelPermalink }}" style="color:#1a56db;font-weight:700;">{{ .Title }}</a>
+              {{ if .Params.private }}<span style="margin-left:8px;font-size:12px;border:1px solid #ddd;border-radius:8px;padding:2px 8px;color:#555;">비공개</span>{{ end }}
+            </td>
+            <td style="padding:14px 10px;text-align:center;">{{ .Params.author | default "익명" }}</td>
+            <td style="padding:14px 10px;text-align:center;">{{ .Date.Format "2006-01-02" }}</td>
+          </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+
+  <style>
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border:1px solid #111;border-radius:10px;background:#111;color:#fff;text-decoration:none;font-weight:700;}
+    .btn-outline{background:#fff;color:#111;}
+    @media (max-width: 720px){ table{min-width:560px;} h1{font-size:28px !important;} }
+  </style>
+
+  <script>
+    (function(){
+      const q = document.getElementById('bbq');
+      const btn = document.getElementById('bbs');
+      btn && btn.addEventListener('click', function(){
+        const v = (q && q.value || '').trim();
+        if(!v) return;
+        const rows = document.querySelectorAll('#bb-list tr');
+        rows.forEach(r => {
+          const t = r.querySelector('td:nth-child(2)')?.innerText || '';
+          r.style.display = t.includes(v) ? '' : 'none';
+        });
+      });
+    })();
+  </script>
+</div>
+{{ end }}
