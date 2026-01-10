@@ -1,13 +1,4 @@
 {{ define "main" }}
-<div class="container" style="max-width:900px;margin:0 auto;padding:28px 16px;">
-  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
-    <a href="/buy-board/" style="text-decoration:none;color:#111;font-weight:800;">← 목록</a>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      {{ with site.Params.kakaoChannel }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">카카오 상담</a>{{ end }}
-      {{ with site.Params.tel }}<a class="btn btn-outline" href="tel:{{ . }}">전화</a>{{ end }}
-    </div>
-  </div>
-
   <h1 style="margin:0 0 8px;font-size:32px;font-weight:900;">{{ .Title }}</h1>
   <div style="color:#666;font-size:14px;margin-bottom:18px;">
     작성자: {{ .Params.author | default "익명" }} · {{ .Date.Format "2006-01-02" }}
