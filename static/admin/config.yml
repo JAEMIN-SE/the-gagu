@@ -1,53 +1,49 @@
-backend:
-  name: git-gateway
-  branch: main
+- name: "sale"
+  label: "판매 상품"
+  folder: "content/products/sale"
+  create: true
+  slug: "{{slug}}"
+  format: "frontmatter"
+  summary: "{{title}} | {{price}}원 | {{status}}"
+  fields:
+    - { label: "상품명", name: "title", widget: "string" }
 
-media_folder: "static/uploads"
-public_folder: "/uploads"
+    - label: "가격"
+      name: "price"
+      widget: "string"
+      hint: "예: 150000 (숫자만)"
+      required: false
 
-collections:
-  - name: "sale"
-    label: "판매"
-    folder: "content/products/sale"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "제목", name: "title", widget: "string" }
-      - { label: "가격", name: "price", widget: "string", required: false }
-      - { label: "설명", name: "description", widget: "text", required: false }
-      - label: "이미지"
-        name: "images"
-        widget: "list"
-        field: { label: "이미지", name: "image", widget: "image" }
-        required: false
-      - { label: "품절", name: "soldOut", widget: "boolean", required: false, default: false }
+    - label: "상태"
+      name: "status"
+      widget: "select"
+      options: ["판매중", "예약중", "판매완료"]
+      default: "판매중"
 
-  - name: "buy"
-    label: "매입"
-    folder: "content/products/buy"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "제목", name: "title", widget: "string" }
-      - { label: "희망가격(선택)", name: "price", widget: "string", required: false }
-      - { label: "설명", name: "description", widget: "text", required: false }
-      - label: "이미지"
-        name: "images"
-        widget: "list"
-        field: { label: "이미지", name: "image", widget: "image" }
-        required: false
+    - label: "카테고리"
+      name: "category"
+      widget: "select"
+      options: ["책상","의자","파티션","캐비닛","회의테이블","서랍","책장","기타"]
+      default: "기타"
 
-  - name: "rental"
-    label: "렌탈"
-    folder: "content/products/rental"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "제목", name: "title", widget: "string" }
-      - { label: "렌탈가격(선택)", name: "price", widget: "string", required: false }
-      - { label: "설명", name: "description", widget: "text", required: false }
-      - label: "이미지"
-        name: "images"
-        widget: "list"
-        field: { label: "이미지", name: "image", widget: "image" }
-        required: false
+    - label: "상품 설명"
+      name: "description"
+      widget: "text"
+      hint: "사이즈 / 상태 / 배송 여부 등 간단히"
+      required: false
+
+    - label: "상품 이미지 (첫 이미지가 썸네일)"
+      name: "images"
+      widget: "list"
+      required: false
+      field:
+        { label: "이미지", name: "image", widget: "image" }
+
+    - label: "정렬 우선순위"
+      name: "order"
+      widget: "number"
+      default: 0
+      required: false
+      hint: "큰 숫자가 먼저 노출됩니다"
+
+    - { label: "작성일", name: "date", widget: "datetime", required: false }
