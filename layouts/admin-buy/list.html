@@ -1,0 +1,119 @@
+{{ define "main" }}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+<style>
+  body{background:#fff;}
+  .wrap{max-width:980px;margin:40px auto;padding:0 16px;}
+  .title{font-weight:900;letter-spacing:-.5px;}
+</style>
+
+<div class="wrap">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="title m-0">매입문의 관리</h2>
+    <button id="btnLogin" class="btn btn-dark">관리자 로그인</button>
+  </div>
+
+  <div class="alert alert-warning small">
+    이 페이지는 <b>관리자만</b> 답변을 달 수 있어요. (Netlify Identity 로그인 필요)
+  </div>
+
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th style="width:80px;">번호</th>
+          <th>제목</th>
+          <th style="width:120px;">작성자</th>
+          <th style="width:110px;">날짜</th>
+          <th style="width:120px;">답변</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  const SUPABASE_URL = "https://cogqxioxepqbabczybpk.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_ADAsmOtInEUzu6d3BdyrnQ_jnfAsNz1";
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const rowsEl = document.getElementById("rows");
+  const btnLogin = document.getElementById("btnLogin");
+
+  function escapeHtml(s){
+    return String(s||"").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+  function fmtDate(d){
+    const dt = new Date(d);
+    const y = dt.getFullYear();
+    const mm = String(dt.getMonth()+1).padStart(2,'0');
+    const dd = String(dt.getDate()).padStart(2,'0');
+    return `${y}-${mm}-${dd}`;
+  }
+
+  function requireAdmin(){
+    const u = window.netlifyIdentity && window.netlifyIdentity.currentUser();
+    return !!u;
+  }
+
+  btnLogin.addEventListener("click", ()=>{
+    if(!window.netlifyIdentity) return alert("Identity 위젯 로드 실패");
+    window.netlifyIdentity.open();
+  });
+
+  async function load(){
+    const { data, error } = await sb.rpc("buy_inquiries_list", { q: null });
+    if(error){ alert(error.message); return; }
+
+    rowsEl.innerHTML = "";
+    (data || []).forEach((p, idx)=>{
+      const no = (data.length - idx);
+      const badge = p.has_reply ? `<span class="badge text-bg-success">완료</span>` : `<span class="badge text-bg-secondary">대기</span>`;
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${no}</td>
+        <td>${escapeHtml(p.title)}</td>
+        <td>${escapeHtml(p.author_name || "익명")}</td>
+        <td>${fmtDate(p.created_at)}</td>
+        <td>
+          ${badge}
+          <button class="btn btn-sm btn-outline-dark ms-2" data-id="${p.id}">답변</button>
+        </td>
+      `;
+      rowsEl.appendChild(tr);
+    });
+
+    rowsEl.querySelectorAll("button[data-id]").forEach(b=>{
+      b.addEventListener("click", ()=>openReply(b.dataset.id));
+    });
+  }
+
+  async function openReply(id){
+    if(!requireAdmin()){
+      alert("관리자 로그인이 필요합니다.");
+      window.netlifyIdentity.open();
+      return;
+    }
+    const reply = prompt("관리자 답변을 입력하세요 (취소하면 저장 안 함)");
+    if(reply === null) return;
+
+    const { error } = await sb.from("buy_inquiries").update({
+      admin_reply: reply,
+      admin_replied_at: new Date().toISOString()
+    }).eq("id", id);
+
+    if(error) return alert(error.message);
+    alert("저장 완료");
+    load();
+  }
+
+  if(window.netlifyIdentity){
+    window.netlifyIdentity.on("login", ()=>{ window.netlifyIdentity.close(); load(); });
+  }
+
+  load();
+</script>
+{{ end }}
